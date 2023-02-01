@@ -168,7 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 7, y: 7}
+  movementOffset: 1
   selector: {fileID: 1674491682}
+  hexElementPrefab: {fileID: 4783107347137265961, guid: c54555ff55db9ce4dac215f8e8019351, type: 3}
 --- !u!1 &520893239
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42453f76de4265c48963c6b4dcb9a443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementOffset: 0.5
   position: {x: 0, y: 0}
 --- !u!4 &1674491683
 Transform:
