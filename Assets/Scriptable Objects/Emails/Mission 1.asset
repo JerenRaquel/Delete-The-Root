@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
+  m_Name: Mission 1
+  m_EditorClassIdentifier: 
+  subject: MAKE THIS GUY STOP
+  sender: Elin Blackburn
+  message: "Hi,\n\tHeard you can hack. Theres this weirdo that keeps messaging me
+    with creepy stuff. Its making me super uncomfy. Think you can get rid of him
+    for me?"
+  reward: {fileID: 0}
