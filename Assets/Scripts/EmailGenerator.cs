@@ -6,6 +6,7 @@ using UnityEngine;
 public class Email {
     public EmailData data;
     [HideInInspector] public bool markedAsRead;
+    [HideInInspector] public string ipv6;
 }
 
 [System.Serializable]
@@ -38,11 +39,29 @@ public class EmailGenerator : MonoBehaviour {
     public EmailDifficulty hackGrids;
 
     public Email GetEmail(EmailGeneratorType type, EmailDifficulty.Difficulty difficulty) {
+        Email fetchedMail = null;
         switch (type) {
             case EmailGeneratorType.HACKGRID:
-                return this.hackGrids.GetEmail(difficulty);
+                fetchedMail = this.hackGrids.GetEmail(difficulty);
+                break;
             default:
                 return null;
         }
+        fetchedMail.ipv6 = GenerateHash(fetchedMail.data.subject);
+        return fetchedMail;
+    }
+
+    private string GenerateHash(string subject) {
+        Hash128 hash = new Hash128();
+        hash.Append(subject);
+        string hashStr = hash.ToString();
+        string ipv6 = "";
+        for(int i = 0; i < hashStr.Length; i++) {
+            ipv6 += hashStr[i];
+            if(i != 0 && i % 4 == 0){
+                ipv6 += ":";
+            }
+        }
+        return ipv6;
     }
 }

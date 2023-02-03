@@ -12,11 +12,7 @@ public class WindowManager : MonoBehaviour {
     public GameObject window;
     public MenuManager menuManager;
 
-    private Queue<BufferData> queue;
-
-    private void Start() {
-        this.queue = new Queue<BufferData>();
-    }
+    private Queue<BufferData> queue = new Queue<BufferData>();
 
     public void Close() {
         this.window.SetActive(false);

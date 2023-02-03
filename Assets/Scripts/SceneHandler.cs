@@ -16,11 +16,13 @@ public class SceneHandler : MonoBehaviour {
 
     public string startingScene;
     public string self;
+    public bool loadStarting = true;
 
     private HashSet<string> loadedScenes;
 
     private void Start() {
         loadedScenes = new HashSet<string>();
+        if (!this.loadStarting) return;
         for (int i = 0; i < SceneManager.sceneCount; i++) {
             if (SceneManager.GetSceneAt(i).name != self) {
                 SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(i).name);

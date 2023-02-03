@@ -23,4 +23,11 @@ public class MenuManager : MonoBehaviour {
         Destroy(this.items[itemName].gameObject);
         this.items.Remove(itemName);
     }
+
+    public void Clear() {
+        foreach (KeyValuePair<string, ItemManager> item in this.items) {
+            Destroy(item.Value.gameObject);
+        }
+        this.items.Clear();
+    }
 }

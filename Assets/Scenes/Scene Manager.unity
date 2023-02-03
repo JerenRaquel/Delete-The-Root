@@ -417,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingScene: Title
   self: Scene Manager
+  loadStarting: 1
 --- !u!4 &1535721977
 Transform:
   m_ObjectHideFlags: 0

@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linePrefab: {fileID: 5356511324484602450, guid: fff8fd15d9433014280f042fc637244a, type: 3}
   menuPrefabHolder: {fileID: 5080551394986700743}
+  icon: {fileID: 0}
 --- !u!1 &5080551394986111578
 GameObject:
   m_ObjectHideFlags: 0
