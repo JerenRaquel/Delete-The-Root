@@ -7,4 +7,7 @@ public class EmailData : ScriptableObject {
     [TextArea] public string message;
 
     public HackRewardData reward;
+
+    public string root;
+    public DirectoryData[] directoryData;
 }

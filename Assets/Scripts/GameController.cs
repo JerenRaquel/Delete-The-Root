@@ -24,50 +24,29 @@ public class GameController : MonoBehaviour {
     public GameObject emailViewerPrefab;
     public WindowManager finConnectManager;
     public FileDirectoryManager fileDirectory;
-    public string[] possibleRoots;
-    public DirectoryData[] directoryTemplates;
 
     private Dictionary<string, Email> emails;
-    private GameObject activeFileDirectory;
-    private Dictionary<string, Directory> directories;
-    private string rootDirectory = null;
 
     private void Start() {
         this.emails = new Dictionary<string, Email>();
-        this.directories = new Dictionary<string, Directory>();
-        SetupDirectories();
-        for (int i = 0; i < 4; i++) {
-            Email email = this.emailGenerator.GetEmail(
-                EmailGenerator.EmailGeneratorType.HACKGRID,
-                EmailDifficulty.Difficulty.EASY
-            );
-            SendEmail(email);
-        }
+        SendEmail(this.emailGenerator.GetEmail(
+            EmailGenerator.EmailGeneratorType.HACKGRID,
+            EmailDifficulty.Difficulty.EASY
+        ));
     }
 
     public void DisconnectFromFileDir() {
         // Set Alert Flags
-        this.directories[rootDirectory].Reset();
         this.fileDirectory.Close();
     }
 
-    public void DeletedRoot() {
+    public void DeletedRoot(string ipv6) {
         // Claim rewards
         Debug.Log("WON");
-        this.directories[rootDirectory].Reset();
         this.fileDirectory.Close();
-    }
-
-    public Directory GetDirectory(string name) {
-        if (!this.directories.ContainsKey(name)) return null;
-        return this.directories[name];
-    }
-
-    public Directory PickRandomDirectory() {
-        int keyIndex = Random.Range(0, this.possibleRoots.Length);
-        this.rootDirectory = this.possibleRoots[keyIndex];
-        this.directories[this.possibleRoots[keyIndex]].SetAsRoot();
-        return this.directories[this.possibleRoots[keyIndex]];
+        finConnectManager.Remove(ipv6);
+        emailManager.Remove(this.emails[ipv6].data.subject);
+        this.emails.Remove(ipv6);
     }
 
     public void HackComplete() {
@@ -82,26 +61,19 @@ public class GameController : MonoBehaviour {
         SceneHandler.instance.LoadScene("GridHack");
     }
 
-    private void SetupDirectories() {
-        foreach (DirectoryData directory in this.directoryTemplates) {
-            bool state = this.directories.TryAdd(directory.name, new Directory(directory));
-        }
-    }
-
     private void SendEmail(Email email) {
         if (emails.ContainsKey(email.ipv6)) return;
         emails.Add(email.ipv6, email);
         emailManager.Add(email.data.subject, () => {
             GameObject go = Instantiate(emailViewerPrefab, anchor.transform);
             go.GetComponent<EmailViewer>().Display(email);
-            Debug.Log("Displaying");
         });
-        CreateConnection(email.ipv6);
+        CreateConnection(email);
     }
 
-    private void CreateConnection(string ipv6) {
-        finConnectManager.Add(ipv6, () => {
-            this.fileDirectory.Open();
+    private void CreateConnection(Email email) {
+        finConnectManager.Add(email.ipv6, () => {
+            this.fileDirectory.Open(email);
         });
     }
 }

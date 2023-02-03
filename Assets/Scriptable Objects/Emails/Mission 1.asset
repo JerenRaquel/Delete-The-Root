@@ -18,3 +18,49 @@ MonoBehaviour:
     with creepy stuff. Its making me super uncomfy. Think you can get rid of him
     for me?"
   reward: {fileID: 0}
+  root: User
+  directoryData:
+  - name: '"Homework" Folder'
+    parent: Desktop
+    children: []
+  - name: Family Photos
+    parent: Pictures
+    children: []
+  - name: Beach
+    parent: Family Photos
+    children: []
+  - name: Pictures
+    parent: User
+    children:
+    - Park
+    - Family Photos
+    - School
+  - name: Desktop
+    parent: User
+    children:
+    - '"Homework" Folder'
+  - name: Documents
+    parent: User
+    children:
+    - School Work
+  - name: User
+    parent: 
+    children:
+    - Pictures
+    - Desktop
+    - Documents
+  - name: School Work
+    parent: Documents
+    children:
+    - Math
+    - English
+    - History
+  - name: English
+    parent: School Work
+    children:
+    - Essay
+    - Presentations
+  - name: History
+    parent: School Work
+    children:
+    - Essay

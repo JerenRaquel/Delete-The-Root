@@ -20,6 +20,7 @@ public class Directory
         return this.children.Length > 0 ? this.children.Length: 0; 
     } }
     public bool HasVisited { get; private set; } = false;
+    public bool HasChildren { get { return (this.children != null && this.children.Length > 0); } }
     public string Name { get { 
         if (this.rootOverride) return "Root";
         return this.name;
@@ -27,6 +28,7 @@ public class Directory
     public bool HasParent { get {
         return !IsRoot;
     } }
+    public bool HasKey { get; set; } = false;
 
     private string name;
     private string parent;
@@ -47,21 +49,19 @@ public class Directory
         this.rootOverride = false;
     }
 
+    public void Visited() {
+        this.HasVisited = true;
+    }
+
     public string GoUp() {
         if (IsRoot) return null;
-        this.HasVisited = true;
         return this.parent;
     }
 
     public string GoDown(int index) {
-        if(this.children == null || index >= this.children.Length) return null;
-        this.HasVisited = true;
+        if (this.children == null || index >= this.children.Length) return null;
         if (this.children[index] == "") return null;
         return this.children[index];
-    }
-
-    public bool HasChildren() {
-        return (this.children != null && this.children.Length > 0);
     }
 
     public void Foreach(Enumerator enumerator) {

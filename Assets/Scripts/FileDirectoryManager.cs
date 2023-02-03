@@ -8,75 +8,93 @@ public class FileDirectoryManager : MonoBehaviour {
     public MenuManager fileExplorer;
     public GameObject parent;
     public TMPro.TextMeshProUGUI cdw;
-    public GameObject[] keyParts;
+    public Sprite folderIcon;
+    public Sprite fileIcon;
+    public Sprite keyIcon;
+    public Image[] keyParts;
+    public Sprite[] foundParts;
+    public Sprite[] outlineParts;
 
-    private Directory currentDirectory = null;
-    private int keysFound = 0;
+    private FileSystem fileSystem;
+    private Email email;
+    private bool requiresUpdate = false;
 
-    public void Open() {
+    public void Open(Email email) {
         this.parent.SetActive(true);
-        this.currentDirectory = GameController.instance.PickRandomDirectory();
-        foreach (var key in this.keyParts) {
-            key.SetActive(false);
+        this.email = email;
+        this.fileSystem = new FileSystem(email.data.directoryData, email.data.root);
+        for (int i = 0; i < this.keyParts.Length; i++) {
+            this.keyParts[i].sprite = this.outlineParts[i];
         }
         Display();
     }
 
     public void Close() {
         this.parent.SetActive(false);
-        this.currentDirectory = null;
-        this.keysFound = 0;
     }
 
     public void Delete() {
-        if (!this.currentDirectory.IsRoot) return;
-        GameController.instance.DeletedRoot();
+        if (!this.fileSystem.IsUnlocked) return;
+        GameController.instance.DeletedRoot(this.email.ipv6);
     }
 
     public void Disconnect() {
+        this.fileSystem = null;
+        this.email = null;
+        this.fileExplorer.Clear();
         GameController.instance.DisconnectFromFileDir();
     }
 
+    private void FixedUpdate() {
+        if (this.requiresUpdate) {
+            this.requiresUpdate = false;
+            Display();
+        }
+    }
+
     private void Display() {
-        if (this.keysFound == 2) {
-            deleteButton.interactable = true;
-            return;
-        }
+        deleteButton.interactable = this.fileSystem.IsUnlocked;
+        this.cdw.text = this.fileSystem.DirectoryName;
 
-        this.cdw.text = this.currentDirectory.Name;
-
-        if (currentDirectory.HasParent) {
-            fileExplorer.Add("..", () => {
-                fileExplorer.Clear();
-                currentDirectory = GameController.instance.GetDirectory(currentDirectory.GoUp());
-                QuickHack();
-                Display();
+        string parent = this.fileSystem.GetParent();
+        if (parent != null) {
+            fileExplorer.Add("..", folderIcon, () => {
+                this.fileSystem.ChangeDirectory(parent, () => {
+                    this.fileExplorer.Clear();
+                    QuickHack();
+                    this.requiresUpdate = true;
+                });
             });
         }
 
-        if (!currentDirectory.HasVisited) {
-            fileExplorer.Add("Key", () => {
-                this.keyParts[this.keysFound].SetActive(true);
-                this.keysFound++;
-            });
-        }
-
-        if (this.currentDirectory == null) return;
-        this.currentDirectory.Foreach((in string name, int index) => {
-            if (GameController.instance.GetDirectory(name) == null || !GameController.instance.GetDirectory(name).HasChildren()) return;
-            fileExplorer.Add(name, () => {
-                string child = currentDirectory.GoDown(index);
-                if (child == null) return;
-                currentDirectory = GameController.instance.GetDirectory(child);
-                fileExplorer.Clear();
-                QuickHack();
-                Display();
-            });
+        this.fileSystem.Foreach((in string name, int index) => {
+            string child = this.fileSystem.GetChild(index);
+            if (child == null || this.fileSystem.CheckIfFile(child)) {
+                this.fileExplorer.Add(name, fileIcon, null);
+            } else {
+                this.fileExplorer.Add(name, folderIcon, () => {
+                    this.fileSystem.ChangeDirectory(child, () => {
+                        this.fileExplorer.Clear();
+                        QuickHack();
+                        this.requiresUpdate = true;
+                    });
+                });
+            }
         });
+
+        if (this.fileSystem.HasKey) {
+            this.fileExplorer.Add("Key", this.keyIcon, () => {
+                this.keyParts[this.fileSystem.Keys].sprite = this.foundParts[this.fileSystem.Keys];
+                this.fileSystem.FoundKey();
+                this.fileExplorer.Remove("Key");
+                this.fileSystem.MarkAsVisited();
+                this.requiresUpdate = true;
+            });
+        }
     }
 
     private void QuickHack() {
-        if (this.currentDirectory.HasVisited) return;
+        if (this.fileSystem.HasVisited) return;
         GameController.instance.LoadHackingMiniGame();
     }
 }

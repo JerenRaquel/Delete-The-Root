@@ -11,6 +11,7 @@ public class WindowManager : MonoBehaviour {
 
     public GameObject window;
     public MenuManager menuManager;
+    public Sprite icon;
 
     private Queue<BufferData> queue = new Queue<BufferData>();
 
@@ -22,18 +23,22 @@ public class WindowManager : MonoBehaviour {
         this.window.SetActive(true);
         while (this.queue.Count > 0) {
             BufferData data = this.queue.Dequeue();
-            this.menuManager.Add(data.itemName, data.callback);
+            this.menuManager.Add(data.itemName, icon, data.callback);
         }
     }
 
     public void Add(string itemName, ItemManager.Callback callback) {
         if (this.window.activeSelf) {
-            this.menuManager.Add(itemName, callback);
+            this.menuManager.Add(itemName, icon, callback);
         } else {
             BufferData data;
             data.itemName = itemName;
             data.callback = callback;
             this.queue.Enqueue(data);
         }
+    }
+
+    public void Remove(string itemName) {
+        this.menuManager.Remove(itemName);
     }
 }
