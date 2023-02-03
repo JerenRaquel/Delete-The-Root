@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
     public GameObject anchor;
     public GameObject cursor;
     public GameObject desktopScreen;
+    public GameObject emailNotif;
     public EmailGenerator emailGenerator;
     public WindowManager emailManager;
     public GameObject emailViewerPrefab;
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour {
     public FileDirectoryManager fileDirectory;
 
     private Dictionary<string, Email> emails;
+    private int cash = 0;
 
     private void Start() {
         this.emails = new Dictionary<string, Email>();
@@ -35,18 +37,25 @@ public class GameController : MonoBehaviour {
         ));
     }
 
+    public void RaiseAlert() {
+        Debug.Log("ALERT!");
+    }
+
     public void DisconnectFromFileDir() {
-        // Set Alert Flags
+        RaiseAlert();
         this.fileDirectory.Close();
     }
 
     public void DeletedRoot(string ipv6) {
-        // Claim rewards
-        Debug.Log("WON");
+        this.cash = this.emails[ipv6].data.reward.cash;
         this.fileDirectory.Close();
         finConnectManager.Remove(ipv6);
         emailManager.Remove(this.emails[ipv6].data.subject);
         this.emails.Remove(ipv6);
+        if (this.emails.Count == 0) {
+            this.finConnectManager.Close();
+            this.emailNotif.SetActive(false);
+        }
     }
 
     public void HackComplete() {
@@ -64,6 +73,7 @@ public class GameController : MonoBehaviour {
     private void SendEmail(Email email) {
         if (emails.ContainsKey(email.ipv6)) return;
         emails.Add(email.ipv6, email);
+        this.emailNotif.SetActive(true);
         emailManager.Add(email.data.subject, () => {
             GameObject go = Instantiate(emailViewerPrefab, anchor.transform);
             go.GetComponent<EmailViewer>().Display(email);

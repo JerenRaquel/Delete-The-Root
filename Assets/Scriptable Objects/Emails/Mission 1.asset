@@ -20,35 +20,35 @@ MonoBehaviour:
   reward: {fileID: 0}
   root: User
   directoryData:
-  - name: '"Homework" Folder'
-    parent: Desktop
-    children: []
-  - name: Family Photos
-    parent: Pictures
-    children: []
-  - name: Beach
-    parent: Family Photos
-    children: []
-  - name: Pictures
-    parent: User
-    children:
-    - Park
-    - Family Photos
-    - School
-  - name: Desktop
-    parent: User
-    children:
-    - '"Homework" Folder'
-  - name: Documents
-    parent: User
-    children:
-    - School Work
   - name: User
     parent: 
     children:
     - Pictures
     - Desktop
     - Documents
+  - name: Pictures
+    parent: User
+    children:
+    - Park
+    - Family Photos
+    - School
+  - name: Family Photos
+    parent: Pictures
+    children: []
+  - name: Beach
+    parent: Family Photos
+    children: []
+  - name: Desktop
+    parent: User
+    children:
+    - '"Homework" Folder'
+  - name: '"Homework" Folder'
+    parent: Desktop
+    children: []
+  - name: Documents
+    parent: User
+    children:
+    - School Work
   - name: School Work
     parent: Documents
     children:

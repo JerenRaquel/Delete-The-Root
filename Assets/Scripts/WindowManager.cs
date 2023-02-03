@@ -14,6 +14,7 @@ public class WindowManager : MonoBehaviour {
     public Sprite icon;
 
     private Queue<BufferData> queue = new Queue<BufferData>();
+    private Queue<string> removeBuffer = new Queue<string>();
 
     public void Close() {
         this.window.SetActive(false);
@@ -24,6 +25,9 @@ public class WindowManager : MonoBehaviour {
         while (this.queue.Count > 0) {
             BufferData data = this.queue.Dequeue();
             this.menuManager.Add(data.itemName, icon, data.callback);
+        }
+        while (this.removeBuffer.Count > 0) {
+            this.menuManager.Remove(this.removeBuffer.Dequeue());
         }
     }
 
@@ -39,6 +43,10 @@ public class WindowManager : MonoBehaviour {
     }
 
     public void Remove(string itemName) {
-        this.menuManager.Remove(itemName);
+        if (this.window.activeSelf) {
+            this.menuManager.Remove(itemName);
+        } else {
+            this.removeBuffer.Enqueue(itemName);
+        }
     }
 }

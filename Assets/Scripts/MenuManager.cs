@@ -8,12 +8,15 @@ public class MenuManager : MonoBehaviour {
 
     private Dictionary<string, ItemManager> items = new Dictionary<string, ItemManager>();
 
-    public void Add(string itemName, Sprite icon, ItemManager.Callback callback) {
+    public void Add(
+        string itemName, Sprite icon, ItemManager.Callback callback,
+        bool isInteractable = true) {
         if (this.items.ContainsKey(itemName)) return;
 
         GameObject go = Instantiate(linePrefab, menuPrefabHolder.transform);
         this.items.Add(itemName, go.GetComponent<ItemManager>());
         this.items[itemName].Initialize(itemName, icon, callback);
+        this.items[itemName].Interactable = isInteractable;
     }
 
     public void Remove(string itemName) {

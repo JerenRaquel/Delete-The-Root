@@ -55,33 +55,21 @@ public class FileDirectoryManager : MonoBehaviour {
     private void Display() {
         deleteButton.interactable = this.fileSystem.IsUnlocked;
         this.cdw.text = this.fileSystem.DirectoryName;
+        LoadKey();
+        LoadParent();
+        LoadDirectories();
+    }
 
-        string parent = this.fileSystem.GetParent();
-        if (parent != null) {
-            fileExplorer.Add("..", folderIcon, () => {
-                this.fileSystem.ChangeDirectory(parent, () => {
-                    this.fileExplorer.Clear();
-                    QuickHack();
-                    this.requiresUpdate = true;
-                });
-            });
+    private void QuickHack() {
+        if (this.fileSystem.HasVisited) return;
+        if (!this.fileSystem.HasKey) {
+            int rng = Random.Range(0, 2);
+            if (rng == 1) return;
         }
+        GameController.instance.LoadHackingMiniGame();
+    }
 
-        this.fileSystem.Foreach((in string name, int index) => {
-            string child = this.fileSystem.GetChild(index);
-            if (child == null || this.fileSystem.CheckIfFile(child)) {
-                this.fileExplorer.Add(name, fileIcon, null);
-            } else {
-                this.fileExplorer.Add(name, folderIcon, () => {
-                    this.fileSystem.ChangeDirectory(child, () => {
-                        this.fileExplorer.Clear();
-                        QuickHack();
-                        this.requiresUpdate = true;
-                    });
-                });
-            }
-        });
-
+    private void LoadKey() {
         if (this.fileSystem.HasKey) {
             this.fileExplorer.Add("Key", this.keyIcon, () => {
                 this.keyParts[this.fileSystem.Keys].sprite = this.foundParts[this.fileSystem.Keys];
@@ -93,8 +81,33 @@ public class FileDirectoryManager : MonoBehaviour {
         }
     }
 
-    private void QuickHack() {
-        if (this.fileSystem.HasVisited) return;
-        GameController.instance.LoadHackingMiniGame();
+    private void LoadParent() {
+        string parent = this.fileSystem.GetParent();
+        if (parent != null) {
+            fileExplorer.Add("..", folderIcon, () => {
+                this.fileSystem.ChangeDirectory(parent, () => {
+                    this.fileExplorer.Clear();
+                    QuickHack();
+                    this.requiresUpdate = true;
+                });
+            });
+        }
+    }
+
+    private void LoadDirectories() {
+        this.fileSystem.Foreach((in string name, int index) => {
+            string child = this.fileSystem.GetChild(index);
+            if (child == null || this.fileSystem.CheckIfFile(child)) {
+                this.fileExplorer.Add(name, fileIcon, null, false);
+            } else {
+                this.fileExplorer.Add(name, folderIcon, () => {
+                    this.fileSystem.ChangeDirectory(child, () => {
+                        this.fileExplorer.Clear();
+                        QuickHack();
+                        this.requiresUpdate = true;
+                    });
+                });
+            }
+        });
     }
 }

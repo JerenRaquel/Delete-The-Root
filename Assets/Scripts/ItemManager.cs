@@ -8,8 +8,14 @@ public class ItemManager : MonoBehaviour {
 
     public TMPro.TextMeshProUGUI textBox;
     public Image image;
+    public Button button;
 
     private Callback callback;
+
+    public bool Interactable {
+        get { return this.button.interactable; }
+        set { this.button.interactable = value; }
+    }
 
     public void Initialize(string name, Sprite icon, Callback callback) {
         this.callback = callback;

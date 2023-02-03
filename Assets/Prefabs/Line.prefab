@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textBox: {fileID: 4308836212224716744}
   image: {fileID: 2828504039043713533}
+  button: {fileID: 3350244454118581650}
 --- !u!1 &8821766305755915973
 GameObject:
   m_ObjectHideFlags: 0

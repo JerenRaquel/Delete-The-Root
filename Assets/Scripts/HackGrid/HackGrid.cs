@@ -14,8 +14,10 @@ public class HackGrid : MonoBehaviour {
     private Grid<GameObject> hexData;   // Hex Element
     private Bag<string> hexCodes;
     private Bag<string> remainingKeyCodes;
+    private HashSet<string> failedHexCodes;
 
     private void Start() {
+        this.failedHexCodes = new HashSet<string>();
         this.remainingKeyCodes = new Bag<string>();
         this.hexCodes = new Bag<string>();
         Initialize();
@@ -59,11 +61,18 @@ public class HackGrid : MonoBehaviour {
         if (this.hexData[coord.x, coord.y] == null) return;
         if (this.hexData[coord.x, coord.y].GetComponent<HexElement>().isDestroyed) return;
         string hexCode = this.hexData[coord.x, coord.y].GetComponent<HexElement>().HexStr;
+        if (this.failedHexCodes.Contains(hexCode)) return;
+
         if (this.remainingKeyCodes.ContainsKey(hexCode)) {
             this.remainingKeyCodes.Remove(hexCode);
             this.hexData[coord.x, coord.y].GetComponent<HexElement>().Destroy();
             ClearRowIfPossible(coord.y);
             UpdateBank();
+        } else {
+            this.failedHexCodes.Add(hexCode);
+            GameController.instance.RaiseAlert();
+            this.hexData[coord.x, coord.y].GetComponent<HexElement>().StrikeThrough();
+            // Play Animation
         }
     }
 

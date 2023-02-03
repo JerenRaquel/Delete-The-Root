@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HexElement : MonoBehaviour {
+
     public string HexStr { get; private set; }
     public bool isDestroyed { get; private set; } = false;
 
+    [SerializeField] private Color strikeColor;
     private static char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F' };
     private TMPro.TextMeshPro textBox;
 
@@ -29,5 +31,9 @@ public class HexElement : MonoBehaviour {
         this.HexStr = "....";
         this.textBox.text = this.HexStr;
         this.textBox.alignment = TMPro.TextAlignmentOptions.BottomFlush;
+    }
+
+    public void StrikeThrough() {
+        this.textBox.color = strikeColor;
     }
 }
