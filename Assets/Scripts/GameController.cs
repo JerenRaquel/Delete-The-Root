@@ -53,6 +53,7 @@ public class GameController : MonoBehaviour {
 
     public void DeletedRoot() {
         // Claim rewards
+        Debug.Log("WON");
         this.directories[rootDirectory].Reset();
         this.fileDirectory.Close();
     }
