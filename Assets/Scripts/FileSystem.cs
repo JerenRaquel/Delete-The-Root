@@ -72,7 +72,6 @@ public class FileSystem {
         for (int i = 0; i < 3; i++) {
             int rng = Random.Range(0, dirs.Count);
             this.directories[dirs[rng]].HasKey = true;
-            Debug.Log(dirs[rng]);
             dirs.Remove(dirs[rng]);
         }
     }

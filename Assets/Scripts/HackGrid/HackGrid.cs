@@ -21,9 +21,11 @@ public class HackGrid : MonoBehaviour {
         this.remainingKeyCodes = new Bag<string>();
         this.hexCodes = new Bag<string>();
         Initialize();
+        Cursor.visible = false;
     }
 
     public void Initialize() {
+        this.failedHexCodes.Add("....");
         this.selector.Initialize(this.size, this.movementOffset, this.offset, ChoosePosition);
         this.hexData = new Grid<GameObject>(this.size.x, this.size.y);
         for (int y = 0; y < this.hexData.y; y++) {
@@ -34,7 +36,9 @@ public class HackGrid : MonoBehaviour {
                     Quaternion.identity,
                     transform
                 );
-                string hexCode = this.hexData[x, y].GetComponent<HexElement>().Initialize();
+                string hexCode = this.hexData[x, y]
+                    .GetComponent<HexElement>()
+                    .Initialize();
                 if (this.hexCodes.ContainsKey(hexCode)) {
                     this.hexCodes[hexCode]++;
                 } else {
@@ -49,6 +53,20 @@ public class HackGrid : MonoBehaviour {
             if (!this.remainingKeyCodes.ContainsKey(randomHexCode)) {
                 this.remainingKeyCodes.Add(randomHexCode, this.hexCodes[randomHexCode]);
                 count++;
+            }
+        }
+
+        bool enableHighlighting = PlayerProfiler.instance.IsEquiped("Syntax Highlighter");
+        if (enableHighlighting) {
+            for (int y = 0; y < this.hexData.y; y++) {
+                for (int x = 0; x < this.hexData.x; x++) {
+                    if (this.remainingKeyCodes
+                        .ContainsKey(this.hexData[x, y]
+                        .GetComponent<HexElement>().HexStr)
+                        ) {
+                        this.hexData[x, y].GetComponent<HexElement>().Highlight();
+                    }
+                }
             }
         }
         for (int y = 0; y < this.hexData.y; y++) {
@@ -102,6 +120,7 @@ public class HackGrid : MonoBehaviour {
             }
         }
         if (this.remainingKeyCodes.ItemCount == 0) {
+            Cursor.visible = true;
             GameController.instance.HackComplete();
         }
     }

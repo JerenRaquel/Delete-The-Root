@@ -8,6 +8,8 @@ public class HexElement : MonoBehaviour {
     public bool isDestroyed { get; private set; } = false;
 
     [SerializeField] private Color strikeColor;
+    [SerializeField] private Color highlightedColor;
+
     private static char[] letters = { 'A', 'B', 'C', 'D', 'E', 'F' };
     private TMPro.TextMeshPro textBox;
 
@@ -15,14 +17,10 @@ public class HexElement : MonoBehaviour {
         this.textBox = gameObject.GetComponent<TMPro.TextMeshPro>();
     }
 
-    public string Initialize(string forcedHexStr = null) {
-        if (forcedHexStr == null) {
-            int num = Random.Range(1, 10);
-            char letter = letters[Random.Range(0, letters.Length)];
-            this.HexStr = num.ToString() + letter;
-        } else {
-            this.HexStr = forcedHexStr;
-        }
+    public string Initialize() {
+        int num = Random.Range(1, 10);
+        char letter = letters[Random.Range(0, letters.Length)];
+        this.HexStr = num.ToString() + letter;
         this.textBox.text = this.HexStr;
         return this.HexStr;
     }
@@ -31,6 +29,10 @@ public class HexElement : MonoBehaviour {
         this.HexStr = "....";
         this.textBox.text = this.HexStr;
         this.textBox.alignment = TMPro.TextAlignmentOptions.BottomFlush;
+    }
+
+    public void Highlight() {
+        this.textBox.color = highlightedColor;
     }
 
     public void StrikeThrough() {

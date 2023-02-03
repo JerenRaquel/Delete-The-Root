@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strikeColor: {r: 1, g: 0.2509804, b: 0.2509804, a: 1}
+  highlightedColor: {r: 0.007843138, g: 0.6509804, b: 0, a: 1}
 --- !u!114 &4783107347137265962
 MonoBehaviour:
   m_ObjectHideFlags: 0

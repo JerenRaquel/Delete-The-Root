@@ -14,7 +14,6 @@ public class EmailViewer : MonoBehaviour {
     }
 
     public void Close() {
-        Debug.Log("Closing");
         Destroy(this.gameObject);
     }
 }

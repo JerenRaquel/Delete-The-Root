@@ -2,52 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class Email {
     public EmailData data;
-    [HideInInspector] public bool markedAsRead;
-    [HideInInspector] public string ipv6;
-}
+    public bool markedAsRead;
+    public string ipv6;
 
-[System.Serializable]
-public class EmailDifficulty {
-    public enum Difficulty {
-        EASY = 0b0000_0001,
-        NORMAL = 0b0000_0010,
+    public Email(EmailData emailData) {
+        this.data = emailData;
     }
 
-    [Header("Easy")]
-    [SerializeField] private Email[] easy;
-
-    public Email GetEmail(Difficulty difficulty) {
-        switch (difficulty) {
-            case Difficulty.EASY:
-                return this.easy[Random.Range(0, this.easy.Length)];
+    public string HackScene {
+        get {
+            switch (this.data.hackingType) {
+                case EmailGenerator.EmailGeneratorType.ANY:
+                    return "GridHack";
+                case EmailGenerator.EmailGeneratorType.HACKGRID:
+                    return "GridHack";
+                case EmailGenerator.EmailGeneratorType.MATRIXCYPER:
+                    return null;
             default:
                 return null;
+            }
         }
     }
 }
 
 public class EmailGenerator : MonoBehaviour {
+    [System.Serializable]
     public enum EmailGeneratorType {
         ANY = HACKGRID | MATRIXCYPER,
         HACKGRID = 0b0000_0001,
         MATRIXCYPER = 0b0000_0010
     }
 
-    public EmailDifficulty emails;
+    [SerializeField] private EmailData[] emails;
 
-    public Email GetEmail(EmailGeneratorType type, EmailDifficulty.Difficulty difficulty) {
-        Email fetchedMail = null;
-        switch (type) {
-            case EmailGeneratorType.HACKGRID:
-                fetchedMail = this.emails.GetEmail(difficulty);
-                break;
-            default:
-                return null;
+    private Dictionary<int, List<Email>> missionEmails;
+    private int maxLevel;
+
+    private void Awake() {
+        this.missionEmails = new Dictionary<int, List<Email>>();
+        foreach (EmailData email in this.emails) {
+            if (!this.missionEmails.ContainsKey(email.level)) {
+                this.missionEmails.Add(email.level, new List<Email>());
+                this.maxLevel = Mathf.Max(this.maxLevel, email.level);
+            }
+            this.missionEmails[email.level].Add(new Email(email));
         }
-        fetchedMail.ipv6 = GenerateHash(fetchedMail.data.subject);
+    }
+
+    public Email[] GetEmails(int level) {
+        if (level >= this.maxLevel) return null;
+        Email[] fetchedMail = this.missionEmails[level].ToArray();
+        foreach (Email email in fetchedMail) {
+            email.ipv6 = GenerateHash(email.data.subject);
+        }
         return fetchedMail;
     }
 

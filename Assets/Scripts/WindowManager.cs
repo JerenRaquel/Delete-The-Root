@@ -11,17 +11,33 @@ public class WindowManager : MonoBehaviour {
 
     public GameObject window;
     public MenuManager menuManager;
+    public GameObject shopWindow;
+    public DisplayUpgrades displayUpgrades;
+    public Shop shop;
     public Sprite icon;
+    public TMPro.TextMeshProUGUI cashBox;
 
     private Queue<BufferData> queue = new Queue<BufferData>();
     private Queue<string> removeBuffer = new Queue<string>();
 
     public void Close() {
+        if (shopWindow != null) {
+            this.shopWindow.SetActive(false);
+        }
         this.window.SetActive(false);
     }
 
-    public void Open() {
+    public void Open(int slot = -1) {
+        if (this.displayUpgrades != null) {
+            if (PlayerProfiler.instance.GetUnequippedUpgrades() == null) return;
+        }
+
         this.window.SetActive(true);
+        if (this.cashBox != null) this.cashBox.text = "$" + PlayerProfiler.instance.cash;
+        if (this.displayUpgrades != null && slot >= 0) {
+            this.displayUpgrades.Display(slot);
+        }
+        if (this.menuManager == null) return;
         while (this.queue.Count > 0) {
             BufferData data = this.queue.Dequeue();
             this.menuManager.Add(data.itemName, icon, data.callback);
@@ -29,6 +45,12 @@ public class WindowManager : MonoBehaviour {
         while (this.removeBuffer.Count > 0) {
             this.menuManager.Remove(this.removeBuffer.Dequeue());
         }
+    }
+
+    public void OpenShop() {
+        if (shopWindow == null) return;
+        this.shopWindow.SetActive(true);
+        this.shop.UpdateCash();
     }
 
     public void Add(string itemName, ItemManager.Callback callback) {

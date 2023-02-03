@@ -66,7 +66,7 @@ public class FileDirectoryManager : MonoBehaviour {
             int rng = Random.Range(0, 2);
             if (rng == 1) return;
         }
-        GameController.instance.LoadHackingMiniGame();
+        GameController.instance.LoadHackingMiniGame(this.email.ipv6);
     }
 
     private void LoadKey() {
