@@ -28,7 +28,7 @@ public class HackGrid : MonoBehaviour {
             for (int x = 0; x < this.hexData.x; x++) {
                 this.hexData[x, y] = Instantiate(
                     hexElementPrefab,
-                    new Vector3(x * this.movementOffset + this.offset.x, y * this.movementOffset + this.offset.y, 0),
+                    new Vector3(x * this.movementOffset + this.offset.x, y * this.movementOffset + this.offset.y, -5),
                     Quaternion.identity,
                     transform
                 );
@@ -91,6 +91,9 @@ public class HackGrid : MonoBehaviour {
             for (int x = 0; x < this.hexData.x; x++) {
                 this.hexData[x, y].GetComponent<HexElement>().Destroy();
             }
+        }
+        if (this.remainingKeyCodes.ItemCount == 0) {
+            GameController.instance.HackComplete();
         }
     }
 }

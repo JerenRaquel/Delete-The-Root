@@ -36,13 +36,13 @@ public class EmailGenerator : MonoBehaviour {
         MATRIXCYPER = 0b0000_0010
     }
 
-    public EmailDifficulty hackGrids;
+    public EmailDifficulty emails;
 
     public Email GetEmail(EmailGeneratorType type, EmailDifficulty.Difficulty difficulty) {
         Email fetchedMail = null;
         switch (type) {
             case EmailGeneratorType.HACKGRID:
-                fetchedMail = this.hackGrids.GetEmail(difficulty);
+                fetchedMail = this.emails.GetEmail(difficulty);
                 break;
             default:
                 return null;

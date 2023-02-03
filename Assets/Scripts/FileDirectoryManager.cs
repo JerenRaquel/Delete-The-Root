@@ -4,37 +4,54 @@ using UnityEngine;
 
 public class FileDirectoryManager : MonoBehaviour {
     public MenuManager fileExplorer;
+    public GameObject parent;
+    public TMPro.TextMeshProUGUI cdw;
 
-    private GameController gameController;
     private Directory currentDirectory = null;
 
-    public void Initialize(GameController controller, DirectoryData directoryData) {
-        this.gameController = controller;
-        this.currentDirectory = new Directory(directoryData);
+    public void Open() {
+        this.parent.SetActive(true);
+        this.currentDirectory = GameController.instance.PickRandomDirectory();
+        Display();
+    }
+
+    public void Close() {
+        this.parent.SetActive(false);
+        this.currentDirectory = null;
     }
 
     public void Delete() {
         if (!this.currentDirectory.IsRoot) return;
-        this.gameController.DeletedRoot();
+        GameController.instance.DeletedRoot();
     }
 
     public void Disconnect() {
-        this.gameController.DisconnectFromFileDir();
+        GameController.instance.DisconnectFromFileDir();
     }
 
     private void Display() {
-        fileExplorer.Add("..", () => {
-            fileExplorer.Clear();
-            currentDirectory = currentDirectory.GoUp();
-            QuickHack();
-            Display();
-        });
+        this.cdw.text = this.currentDirectory.Name;
+
+        if (currentDirectory.HasParent) {
+            fileExplorer.Add("..", () => {
+                fileExplorer.Clear();
+                currentDirectory = GameController.instance.GetDirectory(currentDirectory.GoUp());
+                QuickHack();
+                Display();
+            });
+        }
 
         if (this.currentDirectory == null) return;
         this.currentDirectory.Foreach((in string name, int index) => {
+            if(GameController.instance.GetDirectory(name) == null || !GameController.instance.GetDirectory(name).HasChildren()) return;
             fileExplorer.Add(name, () => {
+                string child = currentDirectory.GoDown(index);
+                if (child == null) {
+                    Debug.Log("HI");
+                    return;
+                }
+                currentDirectory = GameController.instance.GetDirectory(child);
                 fileExplorer.Clear();
-                currentDirectory = currentDirectory.GoDown(index);
                 QuickHack();
                 Display();
             });
@@ -43,6 +60,7 @@ public class FileDirectoryManager : MonoBehaviour {
 
     private void QuickHack() {
         if (this.currentDirectory.HasVisited) return;
-        Debug.Log("Begin Hacking");
+        // Debug.Log("Begin Hacking");
+        GameController.instance.LoadHackingMiniGame();
     }
 }

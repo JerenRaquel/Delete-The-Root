@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBox: {fileID: 8152603849907787216}
-  image: {fileID: 8489918926710536719}
+  image: {fileID: 3109397342629390799}
 --- !u!1 &2954265219566687543
 GameObject:
   m_ObjectHideFlags: 0
