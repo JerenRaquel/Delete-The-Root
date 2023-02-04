@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
-  m_Name: Mission 2
+  m_Name: Tutorial
   m_EditorClassIdentifier: 
-  subject: This girl is mean
-  sender: Martin Blackburn
-  message: My sister told me you were able to get rid of her stalker. Shes so much
-    more happier now. Anyway I got this girl that keeps bullying everyone including
-    my little sis. Do me a favor, whatever you did with Elin's stalker do the same
-    to her. I got a sis to go confort now.
-  level: 2
+  subject: Here's a system you can practice on
+  sender: :D
+  message: Assuming you got those programs I asked of you, Fin Connect should automatically
+    pick up the IPv6 of all incoming emails. These are the possible bounties at that
+    moment. Now go load up Fin Connect and try it out. Fin Connection should also
+    display help for your mining adventures.
+  level: 0
   mainMission: 1
   hackingType: 1
   reward: {fileID: 11400000, guid: 3a824082d685dc94a835c393533fea13, type: 2}
-  rootFolder: {fileID: 11400000, guid: 61c078b4ef6d97d469f20dde28a4573c, type: 2}
+  rootFolder: {fileID: 11400000, guid: bbdf0fdb083cec044a7cdd39f37eeb57, type: 2}

@@ -11,6 +11,9 @@ public class FileDirectoryManager : MonoBehaviour {
     public Sprite folderIcon;
     public Sprite fileIcon;
     public Sprite keyIcon;
+    public Slider alertBar;
+    public GameObject alertBarParent;
+    public GameObject alertBarPlaceholder;
     public Image[] keyParts;
     public Sprite[] foundParts;
     public Sprite[] outlineParts;
@@ -61,6 +64,15 @@ public class FileDirectoryManager : MonoBehaviour {
         LoadKey();
         LoadParent();
         LoadDirectories();
+        int alertLevel = GameController.instance.AlertLevel;
+        if (alertLevel > 0) {
+            this.alertBarParent.SetActive(true);
+            this.alertBarPlaceholder.SetActive(false);
+            this.alertBar.value = alertLevel;
+        } else {
+            this.alertBarParent.SetActive(false);
+            this.alertBarPlaceholder.SetActive(true);
+        }
     }
 
     private void QuickHack() {

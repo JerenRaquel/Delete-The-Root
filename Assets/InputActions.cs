@@ -222,6 +222,34 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Messager"",
+            ""id"": ""8a07f226-ecfd-45c0-80f0-10ae2e70f9df"",
+            ""actions"": [
+                {
+                    ""name"": ""NextMessage"",
+                    ""type"": ""Button"",
+                    ""id"": ""fdb9341c-ffb5-4f47-98c2-d2c87df3d51f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""eba6fe2e-81e9-41c5-ab9f-32115834e940"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Main"",
+                    ""action"": ""NextMessage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -248,6 +276,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_HackGrid_Movement = m_HackGrid.FindAction("Movement", throwIfNotFound: true);
         m_HackGrid_Select = m_HackGrid.FindAction("Select", throwIfNotFound: true);
         m_HackGrid_Cancel = m_HackGrid.FindAction("Cancel", throwIfNotFound: true);
+        // Messager
+        m_Messager = asset.FindActionMap("Messager", throwIfNotFound: true);
+        m_Messager_NextMessage = m_Messager.FindAction("NextMessage", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -352,6 +383,39 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     }
     public HackGridActions @HackGrid => new HackGridActions(this);
+
+    // Messager
+    private readonly InputActionMap m_Messager;
+    private IMessagerActions m_MessagerActionsCallbackInterface;
+    private readonly InputAction m_Messager_NextMessage;
+    public struct MessagerActions
+    {
+        private @InputActions m_Wrapper;
+        public MessagerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NextMessage => m_Wrapper.m_Messager_NextMessage;
+        public InputActionMap Get() { return m_Wrapper.m_Messager; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MessagerActions set) { return set.Get(); }
+        public void SetCallbacks(IMessagerActions instance)
+        {
+            if (m_Wrapper.m_MessagerActionsCallbackInterface != null)
+            {
+                @NextMessage.started -= m_Wrapper.m_MessagerActionsCallbackInterface.OnNextMessage;
+                @NextMessage.performed -= m_Wrapper.m_MessagerActionsCallbackInterface.OnNextMessage;
+                @NextMessage.canceled -= m_Wrapper.m_MessagerActionsCallbackInterface.OnNextMessage;
+            }
+            m_Wrapper.m_MessagerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @NextMessage.started += instance.OnNextMessage;
+                @NextMessage.performed += instance.OnNextMessage;
+                @NextMessage.canceled += instance.OnNextMessage;
+            }
+        }
+    }
+    public MessagerActions @Messager => new MessagerActions(this);
     private int m_MainSchemeIndex = -1;
     public InputControlScheme MainScheme
     {
@@ -366,5 +430,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+    }
+    public interface IMessagerActions
+    {
+        void OnNextMessage(InputAction.CallbackContext context);
     }
 }

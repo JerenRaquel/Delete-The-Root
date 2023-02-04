@@ -23,6 +23,8 @@ public class PlayerProfiler : MonoBehaviour {
     private HashSet<string> boughtUpgrades;
     private HashSet<string> equipedUpgrades;
     private string[] slots;
+    [HideInInspector] public int mainMissionsDone = 0;
+    [HideInInspector] public int sideMissionsDone = 0;
 
     private void Start() {
         this.upgradeDict = new Dictionary<string, UpgradeData>();

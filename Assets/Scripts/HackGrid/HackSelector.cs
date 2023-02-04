@@ -41,6 +41,7 @@ public class HackSelector : MonoBehaviour {
     }
 
     private void Move(Vector2 direction) {
+        if (GameController.instance.ActiveTutorialWorking) return;
         if (direction == Vector2.zero) return;
         position.x = Mathf.FloorToInt(Mathf.Clamp(position.x + direction.x, 0, this.maxPosition.x - 1));
         position.y = Mathf.FloorToInt(Mathf.Clamp(position.y + direction.y, 0, this.maxPosition.y - 1));
@@ -48,6 +49,7 @@ public class HackSelector : MonoBehaviour {
     }
 
     private void Select() {
+        if (GameController.instance.ActiveTutorialWorking) return;
         this.callback(this.position);
     }
 }

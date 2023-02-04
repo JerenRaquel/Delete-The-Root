@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdec41dc74913714d8a3ccfc3d8d3423, type: 3}
+  m_Name: Part 5
+  m_EditorClassIdentifier: 
+  parts:
+  - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
+    text: red hexadecimal
+    charDelay: 0.01
+  - fontData: {fileID: 0}
+    text: or
+    charDelay: 0.01
+  - fontData: {fileID: 0}
+    text: a reset such as
+    charDelay: 0.05
+  - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
+    text: disconnecting...
+    charDelay: 0.01

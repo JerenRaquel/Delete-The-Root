@@ -200,6 +200,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Messager",
+            "id": "8a07f226-ecfd-45c0-80f0-10ae2e70f9df",
+            "actions": [
+                {
+                    "name": "NextMessage",
+                    "type": "Button",
+                    "id": "fdb9341c-ffb5-4f47-98c2-d2c87df3d51f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "eba6fe2e-81e9-41c5-ab9f-32115834e940",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Main",
+                    "action": "NextMessage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

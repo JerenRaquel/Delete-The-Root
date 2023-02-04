@@ -8,14 +8,12 @@ namespace TextSystem {
         public FontData defaultFont;
         public float speedModifier;
         public TextData[] textChunks;
+        public bool IsFinished { get { return this.isDone && this.index >= this.textChunks.Length; } }
+        public bool IsWorking { get { return this.isWorking; } }
 
-        private int index;
+        private int index = 0;
         private bool isDone = false;
         private bool isWorking = false;
-
-        private void Start() {
-            Read();
-        }
 
         public void Read() {
             if (!isDone && !isWorking && index < this.textChunks.Length) {
@@ -63,7 +61,8 @@ namespace TextSystem {
                 buffer += result + " ";
             }
             isWorking = false;
-            isDone = true;
+            this.index++;
+            if (this.index >= this.textChunks.Length) isDone = true;
         }
     }
 }
