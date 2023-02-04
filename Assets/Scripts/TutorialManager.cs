@@ -3,9 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour {
+    #region Class Instance
+    public static TutorialManager instance = null;
+    private void CreateInstance() {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+    }
+    #endregion
+
     [SerializeField] private GameObject defaultBlocker;
     [SerializeField] private GameObject chatMessagePrefab;
     [SerializeField] private Transform chatAnchor;
+    [SerializeField] private GameObject mouseBlocker;
     [Header("Message Data")]
     [SerializeField] private string[] messageTriggers;
     [SerializeField] private Message[] messages;
@@ -21,6 +32,7 @@ public class TutorialManager : MonoBehaviour {
     }
 
     private void Awake() {
+        CreateInstance();
         this.inputActions = new InputActions();
         this.messageData = new Dictionary<string, Message>();
         this.triggers = new Dictionary<string, bool>();
@@ -43,10 +55,10 @@ public class TutorialManager : MonoBehaviour {
         this.inputActions.Disable();
     }
 
-    public void LoadMessage(string messageTag) {
-        if (this.IsTutorialActive) return;
-        if (!this.messageData.ContainsKey(messageTag)) return;
-        if (this.triggers[messageTag]) return;
+    public bool LoadMessage(string messageTag) {
+        if (this.IsTutorialActive) return false;
+        if (!this.messageData.ContainsKey(messageTag)) return false;
+        if (this.triggers[messageTag]) return false;
 
         this.triggers[messageTag] = true;
         Message message = this.messageData[messageTag];
@@ -55,6 +67,7 @@ public class TutorialManager : MonoBehaviour {
         } else {
             message.blocker.SetActive(true);
         }
+        this.mouseBlocker.SetActive(true);
 
         GameObject go = Instantiate(chatMessagePrefab, chatAnchor);
         this.currentOpenMessage = go.GetComponent<MessageManager>().Initialize(
@@ -67,8 +80,10 @@ public class TutorialManager : MonoBehaviour {
                 } else {
                     message.blocker.SetActive(false);
                 }
+                this.mouseBlocker.SetActive(false);
             }
         ).Play();
+        return true;
     }
 
     private void PlayNextMessage() {

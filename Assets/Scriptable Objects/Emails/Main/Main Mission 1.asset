@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subject: Here's a harder one
   sender: :D
-  message: Well that goes that laptop.... Thanks for that by the way. <i>sigh</i>
+  message: Well there goes that laptop.... Thanks for that by the way. <i>sigh</i>
     Well here's a old pc I don't need anymore. Do me a favor and wipe the OS off
-    it so I load a different one or pawn it off.
+    it so I can load a different one or pawn it off.
   level: 1
   mainMission: 1
   hackingType: 1

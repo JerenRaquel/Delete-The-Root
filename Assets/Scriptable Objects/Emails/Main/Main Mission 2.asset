@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
   m_Name: Main Mission 2
   m_EditorClassIdentifier: 
-  subject: I got you out there
+  subject: I spread the word
   sender: :D
   message: 'Ok well, you should have an idea on what you are trying to do. <i>I hope
     you do...</i> BTW, check the H4CKS program if you haven''t yet. There should

@@ -41,6 +41,8 @@ public class FileDirectoryManager : MonoBehaviour {
 
     public void Delete() {
         if (!this.fileSystem.IsUnlocked) return;
+        this.fileSystem = null;
+        this.fileExplorer.Clear();
         GameController.instance.DeletedRoot(this.email.ipv6);
     }
 

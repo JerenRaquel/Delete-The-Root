@@ -40,6 +40,12 @@ public class PlayerProfiler : MonoBehaviour {
     public void AddUpgrade(string name) {
         if (this.boughtUpgrades.Contains(name)) return;
         this.boughtUpgrades.Add(name);
+        for (int i = 0; i < 3; i++) {
+            if (this.slots[i] == null || this.slots[i] == "") {
+                this.slots[i] = name;
+                this.equipedUpgrades.Add(name);
+            }
+        }
     }
 
     public void EquipUprade(string name, int slot) {
@@ -90,6 +96,12 @@ public class PlayerProfiler : MonoBehaviour {
 
     public UpgradeData[] GetAllUpgradeData() {
         return this.upgrades;
+    }
+
+    public Sprite GetEquippedSprite(int slot) {
+        if (slot < 0 || slot > 2) return null;
+        if (this.slots[slot] == null || this.slots[slot] == "") return null;
+        return this.upgradeDict[this.slots[slot]].icon;
     }
 
     public string GetEquippedUpgrade(int slot) {

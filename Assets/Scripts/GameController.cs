@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour {
     public GameObject emailViewerPrefab;
     public WindowManager finConnectManager;
     public FileDirectoryManager fileDirectory;
-    public TutorialManager tutorialManager;
 
     private Dictionary<string, Email> recievedEmails;
     private string loadedHack = null;
@@ -34,13 +33,13 @@ public class GameController : MonoBehaviour {
     [HideInInspector] public int AlertLevel { get; private set; } = 0;
     [HideInInspector]
     public bool ActiveTutorialWorking {
-        get { return this.tutorialManager.IsTutorialActive; }
+        get { return TutorialManager.instance.IsTutorialActive; }
     }
 
     private void Start() {
         this.recievedEmails = new Dictionary<string, Email>();
         SendEmail(this.emailGenerator.GetEmails(this.level));
-        this.tutorialManager.LoadMessage("Starting Message");
+        TutorialManager.instance.LoadMessage("Starting Message");
     }
 
     public void RaiseAlert() {
@@ -70,13 +69,14 @@ public class GameController : MonoBehaviour {
             SendEmail(this.emailGenerator.GetEmails(this.level));
         }
         this.AlertLevel = 0;
+        TutorialManager.instance.LoadMessage("Finished First Mission");
     }
 
     public void HackComplete() {
         SceneHandler.instance.UnloadScene(loadedHack);
         this.cursor.SetActive(true);
         this.desktopScreen.SetActive(true);
-        this.tutorialManager.LoadMessage("Alert");
+        TutorialManager.instance.LoadMessage("Alert");
     }
 
     public void LoadHackingMiniGame(string ipv6) {
@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour {
         this.cursor.SetActive(false);
         this.loadedHack = this.recievedEmails[ipv6].HackScene;
         SceneHandler.instance.LoadScene(loadedHack);
-        this.tutorialManager.LoadMessage("Hackgrid");
+        TutorialManager.instance.LoadMessage("Hackgrid");
     }
 
     private void SendEmail(Email[] emails) {
@@ -100,6 +100,8 @@ public class GameController : MonoBehaviour {
             emailManager.Add(email.data.subject, () => {
                 GameObject go = Instantiate(emailViewerPrefab, anchor.transform);
                 go.GetComponent<EmailViewer>().Display(email);
+            }, (ItemManager itemManager) => {
+                if (email.data.mainMission) itemManager.MarkAsSpecial();
             });
             CreateConnection(email);
         }
@@ -108,7 +110,7 @@ public class GameController : MonoBehaviour {
     private void CreateConnection(Email email) {
         finConnectManager.Add(email.ipv6, () => {
             this.fileDirectory.Open(email);
-            this.tutorialManager.LoadMessage("Fin Connect");
+            TutorialManager.instance.LoadMessage("Fin Connect");
         }, (ItemManager itemManager) => {
             if (email.data.mainMission) itemManager.MarkAsSpecial();
         });

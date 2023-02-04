@@ -18,7 +18,7 @@ MonoBehaviour:
     stuff. Its making me super uncomfy. I feel like hes always sneeking pictures
     of me on his phone. Can you get rid of those photos and idk scare him off or
     something.
-  level: 1
+  level: 2
   mainMission: 0
   hackingType: 1
   reward: {fileID: 11400000, guid: 3a824082d685dc94a835c393533fea13, type: 2}
