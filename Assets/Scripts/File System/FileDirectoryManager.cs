@@ -22,7 +22,10 @@ public class FileDirectoryManager : MonoBehaviour {
     public void Open(Email email) {
         this.parent.SetActive(true);
         this.email = email;
-        this.fileSystem = new FileSystem(email.data.directoryData, email.data.root);
+        this.fileSystem = new FileSystem(
+            email.data.rootFolder.directoryData,
+            email.data.rootFolder.root
+        );
         for (int i = 0; i < this.keyParts.Length; i++) {
             this.keyParts[i].sprite = this.outlineParts[i];
         }

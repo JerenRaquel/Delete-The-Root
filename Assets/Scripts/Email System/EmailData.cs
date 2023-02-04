@@ -5,7 +5,7 @@ public class EmailData : ScriptableObject {
     [Header("Email Content")]
     public string subject;
     public string sender;
-    [TextArea] public string message;
+    [TextArea(15, 20)] public string message;
 
     [Header("Game Data")]
     public int level;
@@ -13,6 +13,5 @@ public class EmailData : ScriptableObject {
     public HackRewardData reward;
 
     [Header("Directory Data")]
-    public string root;
-    public DirectoryData[] directoryData;
+    public DirectoryScriptable rootFolder;
 }

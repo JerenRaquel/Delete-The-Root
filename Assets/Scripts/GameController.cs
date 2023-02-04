@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour {
     }
 
     public void DeletedRoot(string ipv6) {
-        PlayerProfiler.instance.cash = this.recievedEmails[ipv6].data.reward.cash;
+        PlayerProfiler.instance.cash += this.recievedEmails[ipv6].data.reward.cash;
         this.fileDirectory.Close();
         finConnectManager.Remove(ipv6);
         emailManager.Remove(this.recievedEmails[ipv6].data.subject);

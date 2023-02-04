@@ -56,7 +56,7 @@ public class EmailGenerator : MonoBehaviour {
     }
 
     public Email[] GetEmails(int level) {
-        if (level >= this.maxLevel) return null;
+        if (level > this.maxLevel) return null;
         Email[] fetchedMail = this.missionEmails[level].ToArray();
         foreach (Email email in fetchedMail) {
             email.ipv6 = GenerateHash(email.data.subject);
