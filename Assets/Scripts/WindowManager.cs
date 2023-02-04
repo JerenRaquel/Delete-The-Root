@@ -23,7 +23,10 @@ public class WindowManager : MonoBehaviour {
     private Queue<BufferData> queue = new Queue<BufferData>();
     private Queue<string> removeBuffer = new Queue<string>();
 
+    [HideInInspector] public bool IsOpen { get; private set; }
+
     public void Close() {
+        this.IsOpen = false;
         if (shopWindow != null) {
             this.shopWindow.SetActive(false);
         }
@@ -31,6 +34,7 @@ public class WindowManager : MonoBehaviour {
     }
 
     public void Open(int slot = -1) {
+        this.IsOpen = true;
         if (this.displayUpgrades != null) {
             if (PlayerProfiler.instance.GetUnequippedUpgrades() == null) return;
         }

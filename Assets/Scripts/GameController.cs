@@ -69,6 +69,7 @@ public class GameController : MonoBehaviour {
             this.level++;
             SendEmail(this.emailGenerator.GetEmails(this.level));
         }
+        this.AlertLevel = 0;
     }
 
     public void HackComplete() {

@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410755b997689ea4dbb3a3b3dafc2d2c, type: 3}
+  m_Name: Main Mission 2
+  m_EditorClassIdentifier: 
+  root: User
+  directoryData:
+  - name: User
+    parent: 
+    children:
+    - Desktop
+    - Pictures
+    - Documents
+  - name: Desktop
+    parent: User
+    children:
+    - Chrome.exe
+    - UnityHub.exe
+  - name: Pictures
+    parent: User
+    children:
+    - Art.psd
+    - Untitled-1.psd
+    - Untitled-2.psd
+    - Untitled-3.psd
+    - Untitled-4.psd
+  - name: Documents
+    parent: User
+    children:
+    - Design Docs
+    - Bank Statements
+  - name: Design Docs
+    parent: Documents
+    children:
+    - Game1.docx
+    - Game2.docx
+    - Game3.docx
+  - name: Bank Statements
+    parent: Documents
+    children:
+    - Statement.pdf
+    - Statement (1).pdf
+    - Statement (2).pdf
+    - Statement (3).pdf

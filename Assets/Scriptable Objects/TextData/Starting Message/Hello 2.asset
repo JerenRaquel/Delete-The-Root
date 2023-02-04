@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parts:
   - fontData: {fileID: 0}
-    text: Anyways, I'll keep an eye on you for your first mission.
+    text: Anyways, I'll help you when I can.
     charDelay: 0.05
