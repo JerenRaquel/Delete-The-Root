@@ -14,10 +14,7 @@ public class GameController : MonoBehaviour {
             Destroy(this);
         }
     #endregion
-    private void Awake() {
-        CreateInstance();
-        this.inputActions = new InputActions();
-    }
+    private void Awake() => CreateInstance();
 
     public GameObject anchor;
     public GameObject cursor;
@@ -28,49 +25,22 @@ public class GameController : MonoBehaviour {
     public GameObject emailViewerPrefab;
     public WindowManager finConnectManager;
     public FileDirectoryManager fileDirectory;
-    public Transform chatAnchor;
-    public GameObject chatBlocker;
-    public GameObject chatMessagePrefab;
-    public string startingMessage;
-    public string firstHackMessage;
-    public string firstAlertLevelMessage;
-    public string firstConnectionMessage;
-    public Message[] messages;
+    public TutorialManager tutorialManager;
 
     private Dictionary<string, Email> recievedEmails;
-    private Dictionary<string, Message> messageData;
-    private MessageManager currentOpenMessage = null;
-    private InputActions inputActions;
     private string loadedHack = null;
     private int level = 0;
-    private bool firstHack = true;
-    private bool firstAlertLevel = true;
-    private bool firstConnect = true;
 
     [HideInInspector] public int AlertLevel { get; private set; } = 0;
-    [HideInInspector] public bool ActiveTutorialWorking { get { return this.currentOpenMessage != null; } }
-
-    private void OnEnable() {
-        this.inputActions.Enable();
-        this.inputActions.Messager.NextMessage.performed += _ => this.PlayNextMessage();
-    }
-
-    private void OnDisable() {
-        this.inputActions.Messager.NextMessage.performed -= _ => this.PlayNextMessage();
-        this.inputActions.Disable();
+    [HideInInspector]
+    public bool ActiveTutorialWorking {
+        get { return this.tutorialManager.IsTutorialActive; }
     }
 
     private void Start() {
         this.recievedEmails = new Dictionary<string, Email>();
-        this.messageData = new Dictionary<string, Message>();
-
-        foreach (Message message in this.messages) {
-            this.messageData.TryAdd(message.messageTag, message);
-        }
-
         SendEmail(this.emailGenerator.GetEmails(this.level));
-
-        this.currentOpenMessage = LoadMessage(startingMessage);
+        this.tutorialManager.LoadMessage("Starting Message");
     }
 
     public void RaiseAlert() {
@@ -105,10 +75,7 @@ public class GameController : MonoBehaviour {
         SceneHandler.instance.UnloadScene(loadedHack);
         this.cursor.SetActive(true);
         this.desktopScreen.SetActive(true);
-        if (this.firstAlertLevel) {
-            this.firstAlertLevel = false;
-            this.currentOpenMessage = LoadMessage(this.firstAlertLevelMessage);
-        }
+        this.tutorialManager.LoadMessage("Alert");
     }
 
     public void LoadHackingMiniGame(string ipv6) {
@@ -116,10 +83,7 @@ public class GameController : MonoBehaviour {
         this.cursor.SetActive(false);
         this.loadedHack = this.recievedEmails[ipv6].HackScene;
         SceneHandler.instance.LoadScene(loadedHack);
-        if (this.firstHack) {
-            this.firstHack = false;
-            this.currentOpenMessage = LoadMessage(firstHackMessage);
-        }
+        this.tutorialManager.LoadMessage("Hackgrid");
     }
 
     private void SendEmail(Email[] emails) {
@@ -143,10 +107,7 @@ public class GameController : MonoBehaviour {
     private void CreateConnection(Email email) {
         finConnectManager.Add(email.ipv6, () => {
             this.fileDirectory.Open(email);
-            if (this.firstConnect) {
-                this.firstConnect = false;
-                this.currentOpenMessage = LoadMessage(this.firstConnectionMessage);
-            }
+            this.tutorialManager.LoadMessage("Fin Connect");
         }, (ItemManager itemManager) => {
             if (email.data.mainMission) itemManager.MarkAsSpecial();
         });
@@ -154,23 +115,5 @@ public class GameController : MonoBehaviour {
 
     private void WinGame() {
         Debug.Log("You Win!");
-    }
-
-    private MessageManager LoadMessage(string messageTag) {
-        this.chatBlocker.SetActive(true);
-        GameObject go = Instantiate(chatMessagePrefab, chatAnchor);
-        return go.GetComponent<MessageManager>().Initialize(
-            this.messageData[messageTag].parts,
-            this.messageData[messageTag].sender,
-            () => {
-                Destroy(this.currentOpenMessage.gameObject);
-                this.chatBlocker.SetActive(false);
-            }
-        ).Play();
-    }
-
-    private void PlayNextMessage() {
-        if (this.currentOpenMessage == null) return;
-        this.currentOpenMessage.Play();
     }
 }

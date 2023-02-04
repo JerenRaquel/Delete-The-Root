@@ -6,6 +6,7 @@ using UnityEngine;
 public class Message {
     public string sender;
     public string messageTag;
+    public GameObject blocker;
     public TextSystem.TextData[] parts;
 }
 
