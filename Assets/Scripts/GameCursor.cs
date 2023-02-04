@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameCursor : MonoBehaviour {
     public Vector3 offset;
+    public bool useWorldCoords = false;
 
     private void OnEnable() {
         Cursor.visible = false;
@@ -12,6 +13,10 @@ public class GameCursor : MonoBehaviour {
     }
 
     void Update() {
-        transform.position = Input.mousePosition + offset;
+        if (this.useWorldCoords) {
+            transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
+        } else {
+            transform.position = Input.mousePosition + offset;
+        }
     }
 }

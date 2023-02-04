@@ -7,6 +7,10 @@ public class Email {
     public bool markedAsRead;
     public string ipv6;
 
+    private static string[] hacks = {
+        "GridHack", "Matrix Cyper"
+    };
+
     public Email(EmailData emailData) {
         this.data = emailData;
     }
@@ -15,11 +19,11 @@ public class Email {
         get {
             switch (this.data.hackingType) {
                 case EmailGenerator.EmailGeneratorType.ANY:
-                    return "GridHack";
+                    return hacks[Random.Range(0, hacks.Length)];
                 case EmailGenerator.EmailGeneratorType.HACKGRID:
                     return "GridHack";
                 case EmailGenerator.EmailGeneratorType.MATRIXCYPER:
-                    return null;
+                    return "Matrix Cyper";
             default:
                 return null;
             }

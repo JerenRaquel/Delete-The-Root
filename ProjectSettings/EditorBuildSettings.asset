@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 73246fa437659c943bcd210127ce35fc
+  - enabled: 1
+    path: Assets/Scenes/Matrix Cyper.unity
+    guid: 1cef74f7347c4d740bc125a4189499a8
   m_configObjects: {}
