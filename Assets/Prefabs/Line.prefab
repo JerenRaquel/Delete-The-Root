@@ -264,6 +264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textBox: {fileID: 4308836212224716744}
+  costBox: {fileID: 0}
+  specialColor: {r: 0.20784314, g: 0.28627452, b: 0.8980392, a: 1}
   image: {fileID: 2828504039043713533}
   button: {fileID: 3350244454118581650}
 --- !u!1 &8821766305755915973

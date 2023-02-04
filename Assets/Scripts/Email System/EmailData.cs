@@ -9,6 +9,7 @@ public class EmailData : ScriptableObject {
 
     [Header("Game Data")]
     public int level;
+    public bool mainMission = false;
     public EmailGenerator.EmailGeneratorType hackingType;
     public HackRewardData reward;
 

@@ -8,6 +8,7 @@ public class ItemManager : MonoBehaviour {
 
     public TMPro.TextMeshProUGUI textBox;
     public TMPro.TextMeshProUGUI costBox;
+    public Color specialColor;
     public Image image;
     public Button button;
 
@@ -24,6 +25,11 @@ public class ItemManager : MonoBehaviour {
         if (icon != null) {
             this.image.sprite = icon;
         }
+        return this;
+    }
+
+    public ItemManager MarkAsSpecial() {
+        this.textBox.color = this.specialColor;
         return this;
     }
 

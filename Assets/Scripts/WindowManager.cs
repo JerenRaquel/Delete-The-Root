@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class WindowManager : MonoBehaviour {
+    public delegate void Apply(ItemManager itemManager);
+
     private struct BufferData {
         public string itemName;
         public ItemManager.Callback callback;
+        public Apply itemApplication;
     }
 
     public GameObject window;
@@ -40,7 +43,8 @@ public class WindowManager : MonoBehaviour {
         if (this.menuManager == null) return;
         while (this.queue.Count > 0) {
             BufferData data = this.queue.Dequeue();
-            this.menuManager.Add(data.itemName, icon, data.callback);
+            ItemManager im = this.menuManager.Add(data.itemName, icon, data.callback);
+            if (data.itemApplication != null) data.itemApplication(im);
         }
         while (this.removeBuffer.Count > 0) {
             this.menuManager.Remove(this.removeBuffer.Dequeue());
@@ -53,13 +57,14 @@ public class WindowManager : MonoBehaviour {
         this.shop.UpdateCash();
     }
 
-    public void Add(string itemName, ItemManager.Callback callback) {
+    public void Add(string itemName, ItemManager.Callback callback, Apply applyFunc = null) {
         if (this.window.activeSelf) {
             this.menuManager.Add(itemName, icon, callback);
         } else {
             BufferData data;
             data.itemName = itemName;
             data.callback = callback;
+            data.itemApplication = applyFunc;
             this.queue.Enqueue(data);
         }
     }

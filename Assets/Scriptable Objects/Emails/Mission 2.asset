@@ -19,6 +19,7 @@ MonoBehaviour:
     my little sis. Do me a favor, whatever you did with Elin's stalker do the same
     to her. I got a sis to go confort now.
   level: 2
+  mainMission: 1
   hackingType: 1
   reward: {fileID: 11400000, guid: 3a824082d685dc94a835c393533fea13, type: 2}
   rootFolder: {fileID: 11400000, guid: 61c078b4ef6d97d469f20dde28a4573c, type: 2}

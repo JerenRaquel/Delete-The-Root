@@ -19,6 +19,7 @@ MonoBehaviour:
     of me on his phone. Can you get rid of those photos and idk scare him off or
     something.
   level: 1
+  mainMission: 1
   hackingType: 1
   reward: {fileID: 11400000, guid: 3a824082d685dc94a835c393533fea13, type: 2}
   rootFolder: {fileID: 11400000, guid: e543bc5be3d6495488dc1f90899582d0, type: 2}

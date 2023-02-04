@@ -92,6 +92,8 @@ public class GameController : MonoBehaviour {
     private void CreateConnection(Email email) {
         finConnectManager.Add(email.ipv6, () => {
             this.fileDirectory.Open(email);
+        }, (ItemManager itemManager) => {
+            itemManager.MarkAsSpecial();
         });
     }
 
