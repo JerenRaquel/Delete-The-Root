@@ -6,18 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GridHack.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
     path: Assets/Scenes/Scene Manager.unity
     guid: 787615ca8f49cc041839a9a54cfb6acc
-  - enabled: 1
-    path: Assets/Scenes/Desktop.unity
-    guid: 42e8c1b35e926904da53778483b30344
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 73246fa437659c943bcd210127ce35fc
   - enabled: 1
+    path: Assets/Scenes/Desktop.unity
+    guid: 42e8c1b35e926904da53778483b30344
+  - enabled: 1
+    path: Assets/Scenes/GridHack.unity
+    guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 0
     path: Assets/Scenes/Matrix Cyper.unity
     guid: 1cef74f7347c4d740bc125a4189499a8
   m_configObjects: {}

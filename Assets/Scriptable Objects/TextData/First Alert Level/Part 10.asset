@@ -14,5 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parts:
   - fontData: {fileID: 0}
-    text: You can get rid of this by completing the mission.
+    text: Completing missions will lower all
+    charDelay: 0.05
+  - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
+    text: Alert Levels
+    charDelay: 0.05
+  - fontData: {fileID: 0}
+    text: by
+    charDelay: 0.05
+  - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
+    text: 5 levels.
     charDelay: 0.05

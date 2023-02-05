@@ -5440,7 +5440,7 @@ MonoBehaviour:
   chatMessagePrefab: {fileID: 9122954422014379937, guid: fa334a477141f7c45bbc28fcbc57f5ce, type: 3}
   chatAnchor: {fileID: 1038507633}
   mouseBlocker: {fileID: 1316220936}
-  debugDisable: 1
+  debugDisable: 0
   messageTriggers:
   - Starting Message
   - Hackgrid
