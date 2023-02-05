@@ -49,3 +49,9 @@ MonoBehaviour:
     children:
     - main.css
     - login.css
+  - name: Pictures
+    parent: User
+    children:
+    - art.png
+    - website_image.png
+    - website_design.psd
