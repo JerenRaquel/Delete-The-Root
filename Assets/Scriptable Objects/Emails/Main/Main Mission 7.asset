@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
+  m_Name: Main Mission 7
+  m_EditorClassIdentifier: 
+  subject: Update
+  sender: Snake
+  message: We gotta lay low for now. That was unless you want to tackle something
+    crazy. Here's the IPV6 for the police system if you dare.
+  level: 8
+  mainMission: 1
+  hackingType: 1
+  reward: {fileID: 11400000, guid: 163513324d23fc14a9a1d152f2a21249, type: 2}
+  rootFolder: {fileID: 11400000, guid: af14ae5ce464ce142892e8d003f7e9b3, type: 2}

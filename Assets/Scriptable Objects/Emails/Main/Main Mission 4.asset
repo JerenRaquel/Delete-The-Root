@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
+  m_Name: Main Mission 4
+  m_EditorClassIdentifier: 
+  subject: Good Job
+  sender: Snake
+  message: Seems you are the one deleting roots. Here's the deal. I have serveral
+    targets that I need brought down. You like causing chaos. This is the first target.
+  level: 5
+  mainMission: 1
+  hackingType: 1
+  reward: {fileID: 11400000, guid: 3a824082d685dc94a835c393533fea13, type: 2}
+  rootFolder: {fileID: 11400000, guid: c99bcb6f47283e54295a5514a09f43da, type: 2}

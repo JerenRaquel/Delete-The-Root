@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410755b997689ea4dbb3a3b3dafc2d2c, type: 3}
+  m_Name: Main Mission 3
+  m_EditorClassIdentifier: 
+  root: User
+  directoryData:
+  - name: User
+    parent: 
+    children:
+    - Desktop
+    - Documents
+  - name: Desktop
+    parent: User
+    children:
+    - Fin Connect.exe
+    - H4CKs.exe
+  - name: Documents
+    parent: User
+    children:
+    - Ips.txt
+    - Projects
+    - H4CKs
+  - name: Projects
+    parent: Documents
+    children:
+    - Crypto Miner.bin
+    - Data Miner.bin
+    - Hex Dumper.exe
+    - Hex Dumps
+  - name: Hex Dumps
+    parent: Projects
+    children:
+    - File 1.bin
+    - File 2.bin
+    - File 3.bin
+    - File 4.bin
+  - name: H4CKs
+    parent: Documents
+    children:
+    - Syntax Highlighter.exe
+    - Alert Catcher.exe
+    - Quick H4CK.exe

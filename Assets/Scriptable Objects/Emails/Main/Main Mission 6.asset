@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
+  m_Name: Main Mission 6
+  m_EditorClassIdentifier: 
+  subject: Need Help
+  sender: Snake
+  message: Alright forget the other targets. There's this group that hired me to
+    hack a bank's system. While I'm taking care of the security systems, I need you
+    to work on erasing our digital footprint. You know what to do.
+  level: 7
+  mainMission: 1
+  hackingType: 1
+  reward: {fileID: 11400000, guid: 10c34252d03fb3a488268d2eadbfd76f, type: 2}
+  rootFolder: {fileID: 11400000, guid: 2f82c70500128d640a35a9d5a310df68, type: 2}

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5e963f004d283a4bab31b9166512d1c, type: 3}
+  m_Name: Main Mission 5
+  m_EditorClassIdentifier: 
+  subject: Update
+  sender: Snake
+  message: I can't. I was watching through a camera on that target while you were
+    working. The face of the guy when his computer blue screen was amazing. Take
+    another mission.
+  level: 6
+  mainMission: 1
+  hackingType: 1
+  reward: {fileID: 11400000, guid: 24ca74dab93e186449c29721a6e1689a, type: 2}
+  rootFolder: {fileID: 11400000, guid: a1fe3e66004739247af9187627adae63, type: 2}
