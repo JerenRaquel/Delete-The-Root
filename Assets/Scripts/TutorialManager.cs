@@ -18,6 +18,7 @@ public class TutorialManager : MonoBehaviour {
     [SerializeField] private Transform chatAnchor;
     [SerializeField] private GameObject mouseBlocker;
     [Header("Message Data")]
+    [SerializeField] private bool debugDisable = false;
     [SerializeField] private string[] messageTriggers;
     [SerializeField] private Message[] messages;
 
@@ -56,6 +57,7 @@ public class TutorialManager : MonoBehaviour {
     }
 
     public bool LoadMessage(string messageTag) {
+        if (this.debugDisable) return true;
         if (this.IsTutorialActive) return false;
         if (!this.messageData.ContainsKey(messageTag)) return false;
         if (this.triggers[messageTag]) return false;
@@ -87,6 +89,7 @@ public class TutorialManager : MonoBehaviour {
     }
 
     private void PlayNextMessage() {
+        if (this.debugDisable) return;
         this.currentOpenMessage.Play();
     }
 }

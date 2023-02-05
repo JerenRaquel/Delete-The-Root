@@ -37,15 +37,17 @@ public class PlayerProfiler : MonoBehaviour {
         }
     }
 
-    public void AddUpgrade(string name) {
-        if (this.boughtUpgrades.Contains(name)) return;
+    public int AddUpgrade(string name) {
+        if (this.boughtUpgrades.Contains(name)) return -1;
         this.boughtUpgrades.Add(name);
         for (int i = 0; i < 3; i++) {
             if (this.slots[i] == null || this.slots[i] == "") {
                 this.slots[i] = name;
                 this.equipedUpgrades.Add(name);
+                return i;
             }
         }
+        return -1;
     }
 
     public void EquipUprade(string name, int slot) {

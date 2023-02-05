@@ -5420,7 +5420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgrades:
   - {fileID: 11400000, guid: 561c54592ec97e4419ec98e811aeca70, type: 2}
-  cash: 0
+  cash: 100
   mainMissionsDone: 0
   sideMissionsDone: 0
 --- !u!114 &1208532445
@@ -5439,6 +5439,7 @@ MonoBehaviour:
   chatMessagePrefab: {fileID: 9122954422014379937, guid: fa334a477141f7c45bbc28fcbc57f5ce, type: 3}
   chatAnchor: {fileID: 1038507633}
   mouseBlocker: {fileID: 1316220936}
+  debugDisable: 1
   messageTriggers:
   - Starting Message
   - Hackgrid

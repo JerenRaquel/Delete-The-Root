@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parts:
   - fontData: {fileID: 0}
-    text: It's basic, but it what you use to connect to other pcs.
+    text: It's basic, but it's what you use to connect to other pcs.
     charDelay: 0.05

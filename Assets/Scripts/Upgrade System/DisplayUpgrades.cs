@@ -8,15 +8,7 @@ public class DisplayUpgrades : MonoBehaviour {
     public Button[] slots;
 
     public void Display(int slot) {
-        int count = 0;
-        for (int i = 0; i < 3; i++) {
-            Sprite icon = PlayerProfiler.instance.GetEquippedSprite(i);
-            if (icon != null) {
-                this.slots[i].gameObject.GetComponent<Image>().sprite = icon;
-                count++;
-            }
-        }
-        if (count == 3) return;
+        if (slot < 0) return;
 
         foreach (var item in PlayerProfiler.instance.GetUnequippedUpgrades()) {
             this.upgradeMenu.Add(item.name, item.icon, () => {

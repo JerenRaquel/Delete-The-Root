@@ -17,7 +17,7 @@ MonoBehaviour:
   message: 'Ok well, you should have an idea on what you are trying to do. <i>I hope
     you do...</i> BTW, check the H4CKS program if you haven''t yet. There should
     be a hack called "Syntax Highlighter". It should highlight those hidden hex elements.
-    Lastly, take this IPv6 bounty I don''t care about til you get those new bounties. '
+    Lastly, take this IPv6 bounty I don''t care about. '
   level: 2
   mainMission: 1
   hackingType: 1

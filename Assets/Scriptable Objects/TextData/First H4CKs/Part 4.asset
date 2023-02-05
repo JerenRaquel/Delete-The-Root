@@ -16,6 +16,6 @@ MonoBehaviour:
   - fontData: {fileID: 11400000, guid: bdb43d922c69df248bc4512993e8aa86, type: 2}
     text: Notice
     charDelay: 0.05
-  - fontData: {fileID: 11400000, guid: bdb43d922c69df248bc4512993e8aa86, type: 2}
+  - fontData: {fileID: 0}
     text: Your money amount as well as missions you completed.
     charDelay: 0.05

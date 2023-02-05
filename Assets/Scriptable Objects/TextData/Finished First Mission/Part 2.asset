@@ -16,9 +16,6 @@ MonoBehaviour:
   - fontData: {fileID: 0}
     text: You completed your first bounty.
     charDelay: 0.05
-  - fontData: {fileID: 0}
-    text: You completed your first bounty.
-    charDelay: 0.05
   - fontData: {fileID: 11400000, guid: 383ecfcef8ca6614b99459aa21cc5671, type: 2}
     text: ...and trashed my laptop...
     charDelay: 0.01

@@ -41,7 +41,7 @@ public class WindowManager : MonoBehaviour {
 
         this.window.SetActive(true);
         if (this.cashBox != null) this.cashBox.text = "$" + PlayerProfiler.instance.cash;
-        if (this.displayUpgrades != null && slot >= 0) {
+        if (this.displayUpgrades != null) {
             this.displayUpgrades.Display(slot);
         }
         if (this.menuManager == null) return;
