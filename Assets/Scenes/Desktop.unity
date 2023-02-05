@@ -5345,6 +5345,7 @@ GameObject:
   - component: {fileID: 1208532445}
   - component: {fileID: 1208532447}
   - component: {fileID: 1208532446}
+  - component: {fileID: 1208532448}
   m_Layer: 0
   m_Name: Game Controller
   m_TagString: Untagged
@@ -5478,6 +5479,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 495b2d0c0014c8a4a89366ac109292af, type: 2}
     - {fileID: 11400000, guid: 9a8534730f679fd43ba5dd5e9319d3a1, type: 2}
     - {fileID: 11400000, guid: c975035a2ee881243b8d460b01b18c37, type: 2}
+    - {fileID: 11400000, guid: 30cbd50acf336274a8c3af2f0760058d, type: 2}
+    - {fileID: 11400000, guid: 08efde77635aef849bba02c95732ada9, type: 2}
+    - {fileID: 11400000, guid: 27cafa4c7aa64604b93ab1a9b2b76890, type: 2}
   - sender: Your Buddy :D
     messageTag: Fin Connect
     blocker: {fileID: 1763132735}
@@ -5667,6 +5671,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1208532448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208532440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885cb5fc7381df646be8a02280113f1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1225439424
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class FileDirectoryManager : MonoBehaviour {
     public Sprite[] outlineParts;
 
     private FileSystem fileSystem;
-    private Email email;
+    [HideInInspector] public Email email { get; private set; }
     private bool requiresUpdate = false;
 
     public void Open(Email email) {
@@ -41,20 +41,23 @@ public class FileDirectoryManager : MonoBehaviour {
 
     public void Delete() {
         if (!this.fileSystem.IsUnlocked) return;
-        this.fileSystem = null;
-        this.fileExplorer.Clear();
+        Reset();
         GameController.instance.DeletedRoot(this.email.ipv6);
     }
 
     public void Disconnect() {
+        Reset();
+        GameController.instance.DisconnectFromFileDir(this.email.ipv6);
+    }
+
+    public void Reset() {
         this.fileSystem = null;
-        this.email = null;
         this.fileExplorer.Clear();
-        GameController.instance.DisconnectFromFileDir();
+        this.requiresUpdate = false;
     }
 
     private void FixedUpdate() {
-        if (this.requiresUpdate) {
+        if (this.requiresUpdate && this.fileSystem != null) {
             this.requiresUpdate = false;
             Display();
         }
@@ -66,7 +69,7 @@ public class FileDirectoryManager : MonoBehaviour {
         LoadKey();
         LoadParent();
         LoadDirectories();
-        int alertLevel = GameController.instance.AlertLevel;
+        int alertLevel = AlertManager.instance.GetAlertLevel(this.email.ipv6);
         if (alertLevel > 0) {
             this.alertBarParent.SetActive(true);
             this.alertBarPlaceholder.SetActive(false);
@@ -80,7 +83,13 @@ public class FileDirectoryManager : MonoBehaviour {
     private void QuickHack() {
         if (this.fileSystem.HasVisited) return;
         if (!this.fileSystem.HasKey) {
-            int rng = Random.Range(0, 2);
+            int level = AlertManager.instance.GetAlertLevel(this.email.ipv6);
+            int rng;
+            if (level > 1) {
+                rng = Random.Range(0, 4);
+            } else {
+                rng = Random.Range(0, 2);
+            }
             if (rng == 1) return;
         }
         GameController.instance.LoadHackingMiniGame(this.email.ipv6);

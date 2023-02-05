@@ -14,10 +14,10 @@ public class HackGrid : MonoBehaviour {
     private Grid<GameObject> hexData;   // Hex Element
     private Bag<string> hexCodes;
     private Bag<string> remainingKeyCodes;
-    private HashSet<string> failedHexCodes;
+    private HashSet<Vector2Int> failedHexCodes;
 
     private void Start() {
-        this.failedHexCodes = new HashSet<string>();
+        this.failedHexCodes = new HashSet<Vector2Int>();
         this.remainingKeyCodes = new Bag<string>();
         this.hexCodes = new Bag<string>();
         Initialize();
@@ -25,14 +25,32 @@ public class HackGrid : MonoBehaviour {
     }
 
     public void Initialize() {
-        this.failedHexCodes.Add("....");
-        this.selector.Initialize(this.size, this.movementOffset, this.offset, ChoosePosition);
-        this.hexData = new Grid<GameObject>(this.size.x, this.size.y);
+        int level = AlertManager.instance.GetAlertLevel(
+            GameController.instance.CurrentConnectionIPv6
+        );
+        Vector2Int newSize = this.size;
+        Vector2 newOffset = this.offset;
+        if (level > 3) {
+            newSize.x += 2;
+            newOffset.x -= 1;
+        }
+        if (level > 5) {
+            newSize.x += 2;
+            newOffset.x -= 1;
+        }
+
+        this.selector.Initialize(
+            newSize,
+            this.movementOffset,
+            newOffset,
+            ChoosePosition
+        );
+        this.hexData = new Grid<GameObject>(newSize.x, newSize.y);
         for (int y = 0; y < this.hexData.y; y++) {
             for (int x = 0; x < this.hexData.x; x++) {
                 this.hexData[x, y] = Instantiate(
                     hexElementPrefab,
-                    new Vector3(x * this.movementOffset + this.offset.x, y * this.movementOffset + this.offset.y, -5),
+                    new Vector3(x * this.movementOffset + newOffset.x, y * this.movementOffset + newOffset.y, -5),
                     Quaternion.identity,
                     transform
                 );
@@ -79,7 +97,8 @@ public class HackGrid : MonoBehaviour {
         if (this.hexData[coord.x, coord.y] == null) return;
         if (this.hexData[coord.x, coord.y].GetComponent<HexElement>().isDestroyed) return;
         string hexCode = this.hexData[coord.x, coord.y].GetComponent<HexElement>().HexStr;
-        if (this.failedHexCodes.Contains(hexCode)) return;
+        if (hexCode == "....") return;
+        if (this.failedHexCodes.Contains(coord)) return;
 
         if (this.remainingKeyCodes.ContainsKey(hexCode)) {
             this.remainingKeyCodes.Remove(hexCode);
@@ -87,8 +106,8 @@ public class HackGrid : MonoBehaviour {
             ClearRowIfPossible(coord.y);
             UpdateBank();
         } else {
-            this.failedHexCodes.Add(hexCode);
-            GameController.instance.RaiseAlert();
+            this.failedHexCodes.Add(coord);
+            AlertManager.instance.RaiseAlertLevel(GameController.instance.CurrentConnectionIPv6);
             this.hexData[coord.x, coord.y].GetComponent<HexElement>().StrikeThrough();
             // Play Animation
         }

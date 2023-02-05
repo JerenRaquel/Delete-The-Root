@@ -30,10 +30,13 @@ public class GameController : MonoBehaviour {
     private string loadedHack = null;
     private int level = 0;
 
-    [HideInInspector] public int AlertLevel { get; private set; } = 0;
     [HideInInspector]
     public bool ActiveTutorialWorking {
         get { return TutorialManager.instance.IsTutorialActive; }
+    }
+    [HideInInspector]
+    public string CurrentConnectionIPv6 {
+        get { return this.fileDirectory.email.ipv6; }
     }
 
     private void Start() {
@@ -42,12 +45,16 @@ public class GameController : MonoBehaviour {
         TutorialManager.instance.LoadMessage("Starting Message");
     }
 
-    public void RaiseAlert() {
-        this.AlertLevel++;
-    }
+    public void DisconnectFromFileDir(string ipv6) {
+        if (this.loadedHack != null) {
+            SceneHandler.instance.UnloadScene(this.loadedHack);
+            this.loadedHack = null;
+            this.cursor.SetActive(true);
+            this.desktopScreen.SetActive(true);
+            this.fileDirectory.Reset();
+        }
 
-    public void DisconnectFromFileDir() {
-        RaiseAlert();
+        AlertManager.instance.RaiseAlertLevel(ipv6);
         this.fileDirectory.Close();
     }
 
@@ -68,12 +75,13 @@ public class GameController : MonoBehaviour {
             this.level++;
             SendEmail(this.emailGenerator.GetEmails(this.level));
         }
-        this.AlertLevel = 0;
+        AlertManager.instance.LowerAlertLevels(ipv6);
         TutorialManager.instance.LoadMessage("Finished First Mission");
     }
 
     public void HackComplete() {
         SceneHandler.instance.UnloadScene(loadedHack);
+        this.loadedHack = null;
         this.cursor.SetActive(true);
         this.desktopScreen.SetActive(true);
         TutorialManager.instance.LoadMessage("Alert");

@@ -26,7 +26,7 @@ public class HashElement : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             other.gameObject.transform.position = this.playerResetPosition;
-            GameController.instance.RaiseAlert();
+            // GameController.instance.RaiseAlert();
         }
     }
 }
