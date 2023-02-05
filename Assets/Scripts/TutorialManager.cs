@@ -90,6 +90,7 @@ public class TutorialManager : MonoBehaviour {
 
     private void PlayNextMessage() {
         if (this.debugDisable) return;
+        if (this.currentOpenMessage == null) return;
         this.currentOpenMessage.Play();
     }
 }

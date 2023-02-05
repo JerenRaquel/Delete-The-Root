@@ -18,7 +18,7 @@ MonoBehaviour:
     charDelay: 0.05
   - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
     text: panic
-    charDelay: 0.01
+    charDelay: 0.05
   - fontData: {fileID: 0}
     text: though!
     charDelay: 0.05

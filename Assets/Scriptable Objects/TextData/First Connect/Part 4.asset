@@ -18,10 +18,10 @@ MonoBehaviour:
     charDelay: 0.05
   - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
     text: delete
-    charDelay: 0.01
+    charDelay: 0.05
   - fontData: {fileID: 0}
     text: someone's
     charDelay: 0.05
   - fontData: {fileID: 11400000, guid: bdb43d922c69df248bc4512993e8aa86, type: 2}
     text: System32?
-    charDelay: 0.01
+    charDelay: 0.05

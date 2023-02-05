@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GridHack.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Win Screen.unity
+    guid: 69f4e1a3ae557b3459b05712638c4c69
   - enabled: 0
     path: Assets/Scenes/Matrix Cyper.unity
     guid: 1cef74f7347c4d740bc125a4189499a8

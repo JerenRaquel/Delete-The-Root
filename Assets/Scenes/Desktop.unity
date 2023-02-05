@@ -5421,7 +5421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgrades:
   - {fileID: 11400000, guid: 561c54592ec97e4419ec98e811aeca70, type: 2}
-  cash: 100
+  cash: 0
   mainMissionsDone: 0
   sideMissionsDone: 0
 --- !u!114 &1208532445

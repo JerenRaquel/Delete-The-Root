@@ -18,7 +18,7 @@ MonoBehaviour:
     charDelay: 0.05
   - fontData: {fileID: 11400000, guid: bdb43d922c69df248bc4512993e8aa86, type: 2}
     text: 3 keys
-    charDelay: 0.01
+    charDelay: 0.05
   - fontData: {fileID: 0}
     text: in their file system.
     charDelay: 0.05

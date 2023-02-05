@@ -125,6 +125,6 @@ public class GameController : MonoBehaviour {
     }
 
     private void WinGame() {
-        Debug.Log("You Win!");
+        SceneHandler.instance.ReplaceScene("Win Screen", "Desktop");
     }
 }

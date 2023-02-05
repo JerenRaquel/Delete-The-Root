@@ -15,10 +15,10 @@ MonoBehaviour:
   parts:
   - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
     text: That
-    charDelay: 0.01
+    charDelay: 0.05
   - fontData: {fileID: 0}
     text: is the
     charDelay: 0.05
   - fontData: {fileID: 11400000, guid: 32c03b5ede7a54c4099b7c702a7de23d, type: 2}
     text: alert bar.
-    charDelay: 0.01
+    charDelay: 0.05
