@@ -34,7 +34,8 @@ MonoBehaviour:
     parent: User
     children:
     - Charity Spending
-    - Contacts.txt
+    - Class Grades.csv
+    - Week Lesson Plan.docx
   - name: Charity Spending
     parent: Documents
     children:

@@ -17,7 +17,7 @@ MonoBehaviour:
   message: I hate this guy. I swear he's out to get me. He's always on my case when
     I'm in class. He's always looking down on me. Mocking me. Belittling me. I hate
     him. Teach him a lesson. This isn't a request.
-  level: 0
+  level: 4
   mainMission: 0
   hackingType: 1
   reward: {fileID: 11400000, guid: 3a824082d685dc94a835c393533fea13, type: 2}
