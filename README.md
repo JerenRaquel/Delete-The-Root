@@ -2,6 +2,9 @@
 This is a "hacking" game where the objective is to delete the root directory of your target. 
 I'm not responsible if you choose to delete your own root directory of someone else's root directory. Have fun! This was my first solo game jam and it was a blast to make. I may come back here to update it with more content later down the line. 
 
+## Game Link
+[Itch.io](https://jeraquel.itch.io/delete-the-root)
+
 ## External Credits for Assets Not Made by Me
 I wanted LoFi music in the game to pass the time while you are completing missions. Please check these people who made the songs. All these songs are free assets that can be used in games as long as no commercial distributions are made.
 
